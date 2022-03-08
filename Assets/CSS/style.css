@@ -33,6 +33,7 @@ header,footer {
 }
 
 .block {
+    visibility: hidden;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
@@ -93,7 +94,7 @@ header,footer {
 /* Start items start */
 /* Toggle visability */
 .start {
-    /* visibility: hidden; */
+    visibility: initial;
 }
 
 .start_rules {
@@ -110,11 +111,6 @@ header,footer {
 
 
 /* Question items start */
-/* Toggle visability */
-.question {
-visibility: hidden;
-}
-
 .question_header {
     display: flex;
     flex-flow: row nowrap;
@@ -124,7 +120,7 @@ visibility: hidden;
 
 .question_current {
     margin: 0;
-    padding: 5% 1% 0 5%;
+    padding: 2.5% 1% 0 2.5%;
     overflow-y: auto;
 }
 
@@ -190,11 +186,6 @@ visibility: hidden;
 
 
 /* Highscore items start */
-/* Toggle visability */
-.highscores {
-    visibility: hidden;
-}
-
 .highscores_scores {
     overflow-y: auto;
     text-align: center;
@@ -212,11 +203,6 @@ visibility: hidden;
 
 
 /* End items start */
-/* Toggle visability */
-.end {
-    visibility: hidden;
-}
-
 .end_tally {
     display: flex;
     flex-flow: column nowrap;

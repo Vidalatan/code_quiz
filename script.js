@@ -44,3 +44,31 @@ function shuffle(array) {
   
     return array;
 }
+
+// Function to display given block and hide others
+function displayBlock(name) {
+    let blocks = document.querySelectorAll(".block")
+
+    blocks.forEach( item => {
+        if (item.className == (name+" block")) {
+            item.style.visibility = "visible"
+        } else {
+            item.style.visibility = "hidden"
+        }
+    })
+}
+
+function setButtons() {
+    let tags = ["start","highscores","question"]
+    tags.forEach( selector => {
+        let buttons = document.querySelectorAll("."+selector+"_button")
+        buttons.forEach( item => {
+            item.addEventListener("click", event => {
+                displayBlock(selector);
+            })
+        })
+
+    })
+}
+
+setButtons();
