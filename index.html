@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Encode Sans Expanded">
+    <link rel="stylesheet" href="./Assets/CSS/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
+
+    <div class="container">    
+        <!-- Main menu shown to user with rules, start button, and highscore button -->
+        <div class="start block">
+            <h2 class="text_center">Rules</h2>
+            <ul class="start_rules">
+                <li>Questions will be multiple choice, or true or false</li>
+                <li>Each question will have it's own timer. If that timer reaches zero (0) the quiz will end and your score will be entered as is</li>
+                <li>Score is calculated by adding 20 points for each question, plus however many seconds remain on the timer.</li>
+            </ul>
+            <ul class="menu_buttons">
+                <button class="primary">Start</button>
+                <button class="secondary">Highscores</button>
+            </ul>
+        </div>
+    
+
+        <!-- Block to contain questions with answers, timer, and exit button-->
+        <main class="question block">
+            <div class="question_header">
+                <h2 class="question_current">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, inventore rem voluptate nam similique praesentium minus aperiam fugiat vitae eum iste delectus libero voluptatem atque tenetur consequatur. Quod, quas veniam?</h2>
+                <span class="question_timer">Time: ##</span>
+            </div>
+            <p class="question_indicator"> Question 1 of 10</p>
+            <ul class="question_choices">
+                <button>Answer Option</button>
+                <button>Answer Option</button>
+                <button>Answer Option</button>
+                <button>Answer Option</button>
+            </ul>
+            <button class="question_quit">Exit Now</button>
+        </main>
+
+
+        <!-- List containing highscores with start and back to rules buttons -->
+        <div class="highscores block">
+            <h2 class="text_center">High Scores</h2>
+            <ol class="highscores_scores">
+                <li>score</li>
+                <li>score</li>
+                <li>score</li>
+                <li>score</li>
+            </ol>
+            <ul class="menu_buttons">
+                <button class="primary">Start</button>
+                <button class="secondary">Back to Rules</button>
+            </ul>
+        </div>
+
+
+        <!-- End menu with final score, highscores button, back to rules button, and restart button -->
+        <div class="end block">
+            <h2 class="text_center">End Results</h2>
+            <div class="end_tally text_center">
+                <h3>Your Score:</h3>
+                <div>Time Points = <span class="end_time_points">20</span> +</div>
+                <div>Correct Points = <span class="end_correct_points">20</span></div>
+                <div class="end_line"></div>
+                <div>Total Points = <span class="end_total_points">40</span></div>
+            </div>
+            <ul class="menu_buttons">
+                <button class="primary">Restart</button>
+                <button class="secondary">Back to Rules</button>
+                <button class="secondary">Highscores</button>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <h2>Stuff</h2>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

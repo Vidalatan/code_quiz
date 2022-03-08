@@ -1,0 +1,252 @@
+:root {
+    --color_main: #5EB1BF;
+    --color_dark: #042A2B;
+    --color_light: #CDEDF6;
+    --color_accent_1: #EF7B45;
+    --color_accent_2: #D84727;
+}
+
+* {
+    font-family: "Encode Sans Expanded";
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    flex-flow: column nowrap;
+    padding: 0;
+    margin: 0;
+    background-color: var(--color_main);
+}
+
+header,footer {
+    height: 75px;
+    padding: 0 50px 0 50px;
+    background-color: var(--color_dark);
+    color: var(--color_accent_1);
+}
+
+.container {
+    position: relative;
+    height: 80%;
+    margin: 50px 0;
+}
+
+.block {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    width: 50%;
+    height: 100%;
+    background-color: var(--color_dark);
+    border-radius: 15px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color_light);
+    margin: 1px 0;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.menu_buttons {
+    display: flex;
+    flex-flow: row wrap;
+    margin-right: 10%;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.menu_buttons button{
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    height: 45px;
+    margin: 0 2% 0 2%;
+    cursor: pointer;
+}
+
+.menu_buttons .primary {
+    background-color: var(--color_accent_2);
+    color: var(--color_light);
+}
+
+.menu_buttons .primary:hover {
+    background-color: var(--color_main);
+    color: var(--color_accent_1);
+}
+
+.menu_buttons .secondary {
+    background-color: var(--color_light);
+    color: var(--color_accent_2);
+}
+
+.menu_buttons .secondary:hover {
+    background-color: var(--color_accent_1);
+    color: var(--color_light);
+}
+
+
+/* Start items start */
+/* Toggle visability */
+.start {
+    /* visibility: hidden; */
+}
+
+.start_rules {
+    text-align: justify;
+    line-height: 200%;
+    font-size: larger;
+    padding: 0 10%;
+}
+
+/* Start items end */
+
+
+/* -------------------- */
+
+
+/* Question items start */
+/* Toggle visability */
+.question {
+visibility: hidden;
+}
+
+.question_header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: 25%;
+}
+
+.question_current {
+    margin: 0;
+    padding: 5% 1% 0 5%;
+    overflow-y: auto;
+}
+
+.question_current::-webkit-scrollbar {
+    width: 10px;
+}
+
+.question_current::-webkit-scrollbar-track {
+    background-color: var(--color_main);
+}
+
+.question_current::-webkit-scrollbar-thumb {
+    background-color: var(--color_accent_1);
+}
+
+.question_current::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color_accent_2);
+}
+
+.question_timer {
+    padding: 5% 5% 0 1%;
+}
+
+.question_indicator {
+    text-align: center;
+}
+
+.question_choices {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2.5%;
+    padding: 0 2.5%;
+}
+
+
+.question_choices button {
+    margin: 1% 0;
+    background-color: var(--color_accent_1);
+    color: var(--color_dark);
+    padding: 2%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.question_choices button:hover {
+    background-color: var(--color_accent_2);
+    color: var(--color_light);
+}
+
+.question_quit {
+    width: 25%;
+    margin: 10% 0 5% 0;
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* Question items end */
+
+
+/* -------------------- */
+
+
+/* Highscore items start */
+/* Toggle visability */
+.highscores {
+    visibility: hidden;
+}
+
+.highscores_scores {
+    overflow-y: auto;
+    text-align: center;
+    list-style-position: inside;
+}
+
+.highscores_scores li {
+    width: 75%;
+}
+
+/* Highscore items end */
+
+
+/* -------------------- */
+
+
+/* End items start */
+/* Toggle visability */
+.end {
+    visibility: hidden;
+}
+
+.end_tally {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.end_line {
+    height: 1px;
+    border: none;
+    margin: 5px 40%;
+    background-color: black;
+}
+
+
+/* End items end */
+
+/* Smaller media tweeks */
+@media screen and (max-width: 850px) {
+    .question_current{
+        font-size: small;
+    }
+
+    .question_choices {
+        flex-flow: row wrap;
+    }
+
+    .start h2 {
+        font-size: smaller;
+    }
+
+    .start_rules {
+        font-size: small;
+    }
+}
