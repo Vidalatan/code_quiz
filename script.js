@@ -23,9 +23,7 @@ questionsList = [
 
 var correct_points=0;
 var timer_points=0;
-var clonedList;
-var counter;
-var timer;
+var username, clonedList, counter, timer;
 
 // Clone array so that it doesn't refrence original
 function cloneArray(array) {
@@ -68,11 +66,11 @@ function mixAnswers(correct, wrongs) {
 
 
 // Function to display given block and hide others
-function displayBlock(name) {
+function displayBlock(tag) {
     let blocks = document.querySelectorAll(".block")
 
     blocks.forEach( item => {
-        if (item.className == (name+" block")) {
+        if (item.className == (tag+" block")) {
             item.style.visibility = "visible"
         } else {
             item.style.visibility = "hidden"
@@ -88,24 +86,29 @@ function removeChildren(parent_element) {
     }
 }
 
+// Rotates next question and resets clock. Adds 20 to points, and timer to points
 function nextQuestion() {
-    clearInterval(timer)
-    rotateQuestion()
+    correct_points += 20;
+    timer_points += counter;
+    clearInterval(timer);
+    rotateQuestion();
 }
 
+// Ends Quiz and tallys score. Does not add current timer to points
 function endQuiz() {
     clearInterval(timer)
+    document.querySelector(".username").innerHTML = username
     displayBlock("end");
     calculateScore();
 }
 
 // Function sets timer for the 
-function setTimer(choices) {
+function setTimer(tick) {
     let question_timer = document.querySelector(".question_timer")
-    counter = choices.length*5
-    question_timer.textContent = "Time Remaining: "+counter
+    counter = tick
+    question_timer.textContent = "Time Remaining: "+tick
     timer = setInterval(function() {
-        if (counter > 0) {
+        if (tick > 0) {
             question_timer.textContent = "Time Remaining: "+counter
             counter--
         } else {
@@ -113,6 +116,31 @@ function setTimer(choices) {
             endQuiz()
         }
     }, 1000)
+}
+
+function calculateScore() {
+    let end_time_points = document.querySelector(".end_time_points")
+    let end_correct_points = document.querySelector(".end_correct_points")
+    let end_total_points = document.querySelector(".end_total_points")
+
+    end_time_points.innerHTML = timer_points;
+    end_correct_points.innerHTML = correct_points;
+    end_total_points.innerHTML = timer_points+correct_points;
+
+    logScore(username, timer_points+correct_points)
+}
+
+function logScore(username, score) {
+    let highscores_scores = document.querySelector(".highscores_scores");
+    let new_element = document.createElement("li");
+
+    new_element.innerHTML = username+": "+score;
+    highscores_scores.appendChild(new_element);
+    sortScores();
+}
+
+function sortScores() {
+
 }
 
 // Function that rotates questions from the cloned/shuffled list and gives answer options events
@@ -123,7 +151,7 @@ function rotateQuestion() {
     let mixed_answers = mixAnswers(question.answer, question.wrong);
     let choices = mixed_answers[0];
     let correct_index = mixed_answers[1];
-    setTimer(choices);
+    setTimer(choices.length*5);
     removeChildren(question_choices);
 
     question_current.textContent = question.question;
@@ -133,20 +161,23 @@ function rotateQuestion() {
         clickable.textContent = item;
         if (choices.indexOf(item) == correct_index) {
             clickable.id = "correct"
-            correct_points += 20 // add timer points here... somehow
             if (clonedList.length > 0) {
                 clickable.addEventListener("click", event => {
                     nextQuestion();
                 })
             } else {
                 clickable.addEventListener("click", event => {
+                    timer_points += counter;
                     endQuiz()
                 })
             }
     
         } else {
             clickable.id = "wrong"
-            // do something with the timer
+            clickable.addEventListener("click", event => {
+                clearInterval(timer)
+                setTimer(counter-2)
+            })
         }
         question_choices.appendChild(clickable);
     })
@@ -159,14 +190,13 @@ function setButtons() {
         let buttons = document.querySelectorAll("."+selector+"_button")
         buttons.forEach( item => {
             if (selector == "question") {
-                console.log("this is the start button")
                 item.addEventListener("click", event => {
+                    username = prompt("What is your Username?\n(Please keep it clean)")
                     displayBlock(selector);
                     setClone();
                     rotateQuestion();
                 }, )
             } else {
-                console.log("this is NOT the start button")
                 item.addEventListener("click", event => {
                     displayBlock(selector)
                 })
