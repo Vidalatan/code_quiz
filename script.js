@@ -23,7 +23,8 @@ questionsList = [
 
 var correct_points=0;
 var timer_points=0;
-var username, clonedList, counter, timer;
+var username, clonedList, counter, timer, current_q;
+var q_x = document.querySelector("#q_x");
 
 // Clone array so that it doesn't refrence original
 function cloneArray(array) {
@@ -50,7 +51,11 @@ function shuffle(array) {
 
 // clones original questionList and shuffles the content for reusability
 function setClone() {
+    let q_y = document.querySelector("#q_y");
     clonedList = shuffle(cloneArray(questionsList));
+    q_y.innerHTML = clonedList.length;
+    current_q = 1
+    q_x.innerHTML = current_q;
 }
 
 // Shuffle wrongs, insert correct at random, and return both the list and correct answer index
@@ -63,7 +68,6 @@ function mixAnswers(correct, wrongs) {
 
     return [wrong_clone, rand];
 }
-
 
 // Function to display given block and hide others
 function displayBlock(tag) {
@@ -78,7 +82,6 @@ function displayBlock(tag) {
     })
 }
 
-
 // Function to remove all child elements within the given parent
 function removeChildren(parent_element) {
     while (parent_element.firstChild) {
@@ -88,6 +91,8 @@ function removeChildren(parent_element) {
 
 // Rotates next question and resets clock. Adds 20 to points, and timer to points
 function nextQuestion() {
+    current_q++
+    q_x.innerHTML = current_q;
     correct_points += 20;
     timer_points += counter;
     clearInterval(timer);
@@ -108,7 +113,7 @@ function setTimer(tick) {
     counter = tick
     question_timer.textContent = "Time Remaining: "+tick
     timer = setInterval(function() {
-        if (tick > 0) {
+        if (counter > 0) {
             question_timer.textContent = "Time Remaining: "+counter
             counter--
         } else {
@@ -128,19 +133,41 @@ function calculateScore() {
     end_total_points.innerHTML = timer_points+correct_points;
 
     logScore(username, timer_points+correct_points)
+    correct_points = 0;
+    timer_points = 0;
 }
 
 function logScore(username, score) {
     let highscores_scores = document.querySelector(".highscores_scores");
     let new_element = document.createElement("li");
+    let new_username = document.createElement("span")
+    let new_score = document.createElement("span")
 
-    new_element.innerHTML = username+": "+score;
-    highscores_scores.appendChild(new_element);
-    sortScores();
-}
+    new_username.className = "score_name"
+    new_username.innerHTML = username+" "
+    new_element.appendChild(new_username)
+    new_score.className = "score_value"
+    new_score.innerHTML = score
+    new_element.appendChild(new_score)
 
-function sortScores() {
-
+    if (highscores_scores.children[0] === undefined) {
+        highscores_scores.appendChild(new_element);
+    } else {
+        for (index in highscores_scores.children) {
+            let compare = parseInt(highscores_scores.children[index].children[1].innerHTML)
+            if (score > compare) {
+                highscores_scores.insertBefore(new_element, highscores_scores.children[index])
+                break;
+            } else if (score <= compare) {
+                highscores_scores.insertBefore(new_element, highscores_scores.children[index].nextSibling)
+                break;
+            } else if (highscores_scores.children[index+1] !== undefined) {
+                continue
+            } else {
+                highscores_scores.appendChild(new_element);
+            }
+        }
+    }
 }
 
 // Function that rotates questions from the cloned/shuffled list and gives answer options events
@@ -171,7 +198,6 @@ function rotateQuestion() {
                     endQuiz()
                 })
             }
-    
         } else {
             clickable.id = "wrong"
             clickable.addEventListener("click", event => {
@@ -204,10 +230,4 @@ function setButtons() {
         })
     })
 }
-
-// Main function called when script is loaded
-function init() {
-    setButtons()
-}
-
-init();
+setButtons()
