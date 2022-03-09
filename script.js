@@ -21,8 +21,11 @@ questionsList = [
     }
 ]
 
-var current_score=0;
+var correct_points=0;
+var timer_points=0;
 var clonedList;
+var counter;
+var timer;
 
 // Clone array so that it doesn't refrence original
 function cloneArray(array) {
@@ -85,6 +88,33 @@ function removeChildren(parent_element) {
     }
 }
 
+function nextQuestion() {
+    clearInterval(timer)
+    rotateQuestion()
+}
+
+function endQuiz() {
+    clearInterval(timer)
+    displayBlock("end");
+    calculateScore();
+}
+
+// Function sets timer for the 
+function setTimer(choices) {
+    let question_timer = document.querySelector(".question_timer")
+    counter = choices.length*5
+    question_timer.textContent = "Time Remaining: "+counter
+    timer = setInterval(function() {
+        if (counter > 0) {
+            question_timer.textContent = "Time Remaining: "+counter
+            counter--
+        } else {
+            clearInterval(timer)
+            endQuiz()
+        }
+    }, 1000)
+}
+
 // Function that rotates questions from the cloned/shuffled list and gives answer options events
 function rotateQuestion() {
     let question_current = document.querySelector(".question_current");
@@ -93,24 +123,24 @@ function rotateQuestion() {
     let mixed_answers = mixAnswers(question.answer, question.wrong);
     let choices = mixed_answers[0];
     let correct_index = mixed_answers[1];
-
+    setTimer(choices);
     removeChildren(question_choices);
 
     question_current.textContent = question.question;
-    
+
     choices.forEach( item => {
         let clickable = document.createElement("button");
         clickable.textContent = item;
         if (choices.indexOf(item) == correct_index) {
             clickable.id = "correct"
-            current_score += 20 // add timer points here... somehow
+            correct_points += 20 // add timer points here... somehow
             if (clonedList.length > 0) {
                 clickable.addEventListener("click", event => {
-                    rotateQuestion()
+                    nextQuestion();
                 })
             } else {
                 clickable.addEventListener("click", event => {
-                    displayBlock("end")
+                    endQuiz()
                 })
             }
     
