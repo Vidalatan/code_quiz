@@ -30,17 +30,6 @@ function cloneArray(array) {
     return x;
 }
 
-// Shuffle wrongs, insert correct at random, and return both the list and correct answer index
-function mixAnswers(correct, wrongs) {
-    let wrong_clone = cloneArray(wrongs)
-    shuffle(wrong_clone);
-
-    let rand = Math.floor(Math.random()*(wrongs.length +1))
-    wrong_clone.splice(rand, 0, correct);
-
-    return [wrong_clone, rand];
-}
-
 // Function shuffles given array. Pulled from
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -58,6 +47,23 @@ function shuffle(array) {
     return array;
 }
 
+// clones original questionList and shuffles the content for reusability
+function setClone() {
+    clonedList = shuffle(cloneArray(questionsList));
+}
+
+// Shuffle wrongs, insert correct at random, and return both the list and correct answer index
+function mixAnswers(correct, wrongs) {
+    let wrong_clone = cloneArray(wrongs)
+    shuffle(wrong_clone);
+
+    let rand = Math.floor(Math.random()*(wrongs.length +1))
+    wrong_clone.splice(rand, 0, correct);
+
+    return [wrong_clone, rand];
+}
+
+
 // Function to display given block and hide others
 function displayBlock(name) {
     let blocks = document.querySelectorAll(".block")
@@ -68,29 +74,6 @@ function displayBlock(name) {
         } else {
             item.style.visibility = "hidden"
         }
-    })
-}
-
-// Sets up all menu buttons except for the quit button
-function setButtons() {
-    let tags = ["start","highscores","question"]
-    tags.forEach( selector => {
-        let buttons = document.querySelectorAll("."+selector+"_button")
-        buttons.forEach( item => {
-            if (selector == "question") {
-                console.log("this is the start button")
-                clonedList = shuffle(cloneArray(questionsList));
-                item.addEventListener("click", event => {
-                    displayBlock(selector);
-                    rotateQuestion();
-                }, )
-            } else {
-                console.log("this is NOT the start button")
-                item.addEventListener("click", event => {
-                    displayBlock(selector)
-                })
-            }
-        })
     })
 }
 
@@ -114,7 +97,6 @@ function rotateQuestion() {
     removeChildren(question_choices);
 
     question_current.textContent = question.question;
-
     
     choices.forEach( item => {
         let clickable = document.createElement("button");
@@ -137,6 +119,29 @@ function rotateQuestion() {
             // do something with the timer
         }
         question_choices.appendChild(clickable);
+    })
+}
+
+// Sets up all menu buttons except for the quit button
+function setButtons() {
+    let tags = ["start","highscores","question"]
+    tags.forEach( selector => {
+        let buttons = document.querySelectorAll("."+selector+"_button")
+        buttons.forEach( item => {
+            if (selector == "question") {
+                console.log("this is the start button")
+                item.addEventListener("click", event => {
+                    displayBlock(selector);
+                    setClone();
+                    rotateQuestion();
+                }, )
+            } else {
+                console.log("this is NOT the start button")
+                item.addEventListener("click", event => {
+                    displayBlock(selector)
+                })
+            }
+        })
     })
 }
 
