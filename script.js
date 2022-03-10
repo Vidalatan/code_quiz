@@ -124,6 +124,9 @@ function endQuiz() {
 
 // Function sets timer for the 
 function setTimer(tick) {
+    if (tick <= 0) {
+        endQuiz();
+    }
     let question_timer = document.querySelector(".question_timer")
     counter = tick
     question_timer.textContent = "Time Remaining: "+tick
