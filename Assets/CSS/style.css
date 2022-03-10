@@ -244,12 +244,15 @@ footer a:hover {
     color: var(--color_accent_1);
 }
 
-/* Smaller media tweeks */
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1400px) {
     .overflow_container {
         overflow-y: auto;
     }
-    
+}
+
+
+/* Smaller media tweeks */
+@media screen and (max-width: 850px) {
     .question_current{
         font-size: small;
     }
