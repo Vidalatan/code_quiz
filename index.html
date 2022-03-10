@@ -16,63 +16,73 @@
     <div class="container">    
         <!-- Main menu shown to user with rules, start button, and highscore button -->
         <div class="start block">
-            <h2 class="text_center">Rules</h2>
-            <ul class="start_rules">
-                <li>Questions will be multiple choice, or true or false</li>
-                <li>Each question will have it's own timer. If that timer reaches zero (0) the quiz will end and your score will be entered as is</li>
-                <li>Score is calculated by adding 20 points for each question, plus however many seconds remain on the timer.</li>
-            </ul>
-            <ul class="menu_buttons">
-                <button class="primary question_button">Begin!</button>
-                <button class="secondary highscores_button">Highscores</button>
-            </ul>
+            <div class="overflow_container">
+                <h2 class="text_center">Rules</h2>
+                <ul class="start_rules">
+                    <li>Questions will be multiple choice, or true/false</li>
+                    <li>Each question will have it's own timer, the length of which depends on the amount of available answer choices. If that timer reaches zero (0) the quiz will end and your score will be entered as is</li>
+                    <li>Score is calculated by adding 20 points for each question, plus however many seconds remain on the timer for each successfully answered question.</li>
+                    <li>You will be prompted for a username when you begin, if you don't select a username then should you choose to save your score it will overwrite the previous anonymous user the next time you revisit the page.</li>
+                </ul>
+                <ul class="menu_buttons">
+                    <button class="primary question_button">Begin!</button>
+                    <button class="secondary highscores_button">Highscores</button>
+                </ul>
+            </div>
         </div>
     
 
         <!-- Block to contain questions with answers, timer, and exit button-->
         <main class="question block">
-            <div class="question_header">
-                <h2 class="question_current">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, inventore rem voluptate nam similique praesentium minus aperiam fugiat vitae eum iste delectus libero voluptatem atque tenetur consequatur. Quod, quas veniam?</h2>
-                <span class="question_timer"></span>
+            <div class="overflow_container">
+                <div class="question_header">
+                    <h2 class="question_current">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit, inventore rem voluptate nam similique praesentium minus aperiam fugiat vitae eum iste delectus libero voluptatem atque tenetur consequatur. Quod, quas veniam?</h2>
+                    <span class="question_timer"></span>
+                </div>
+                <p class="question_indicator"> Question <span id="q_x"></span> of <span id="q_y"></span></p>
+                <ul class="question_choices">
+                </ul>
+                <button class="question_quit quit_button">Exit Now</button>
             </div>
-            <p class="question_indicator"> Question <span id="q_x"></span> of <span id="q_y"></span></p>
-            <ul class="question_choices">
-            </ul>
-            <button class="question_quit quit_button">Exit Now</button>
         </main>
 
 
         <!-- List containing highscores with start and back to rules buttons -->
         <div class="highscores block">
-            <h2 class="text_center">High Scores</h2>
-            <ul class="highscores_scores"></ul>
-            <ul class="menu_buttons">
-                <button class="primary question_button">Begin!</button>
-                <button class="secondary start_button">Back to Rules</button>
-            </ul>
+            <div class="overflow_container">
+                <h2 class="text_center">High Scores</h2>
+                <ul class="highscores_scores"></ul>
+                <ul class="menu_buttons">
+                    <button class="primary question_button">Begin!</button>
+                    <button class="secondary start_button">Back to Rules</button>
+                </ul>
+            </div>
         </div>
 
 
         <!-- End menu with final score, highscores button, back to rules button, and restart button -->
         <div class="end block">
-            <h2 class="text_center">End Results</h2>
-            <div class="end_tally text_center">
-                <h3><span class="username"></span>'s Score:</h3>
-                <div>Time Points = <span class="end_time_points"></span> +</div>
-                <div>Correct Points = <span class="end_correct_points"></span></div>
-                <div class="end_line"></div>
-                <div>Total Points = <span class="end_total_points"></span></div>
+            <div class="overflow_container">
+                <h2 class="text_center">End Results</h2>
+                <div class="end_tally text_center">
+                    <h3><span class="username"></span>'s Score:</h3>
+                    <div>Time Points = <span class="end_time_points"></span> +</div>
+                    <div>Correct Points = <span class="end_correct_points"></span></div>
+                    <div class="end_line"></div>
+                    <div>Total Points = <span class="end_total_points"></span></div>
+                </div>
+                <ul class="menu_buttons">
+                    <button class="primary question_button">Try Again</button>
+                    <button class="secondary start_button">Back to Rules</button>
+                    <button class="secondary highscores_button">Highscores</button>
+                </ul>
             </div>
-            <ul class="menu_buttons">
-                <button class="primary question_button">Try Again</button>
-                <button class="secondary start_button">Back to Rules</button>
-                <button class="secondary highscores_button">Highscores</button>
-            </ul>
         </div>
     </div>
 
     <footer>
-        <h2>Stuff</h2>
+        <h2>Made by: Vidal A Tan</h2>
+        <a href="https://github.com/Vidalatan/code_quiz">Check out the Repo!</a>
     </footer>
 
     <script src="script.js"></script>

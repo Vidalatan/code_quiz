@@ -32,6 +32,10 @@ header,footer {
     margin: 50px 0;
 }
 
+.overflow_container {
+    overflow-y: auto;
+}
+
 .block {
     visibility: hidden;
     display: flex;
@@ -221,9 +225,28 @@ header,footer {
     margin: 5px 40%;
     background-color: black;
 }
-
-
 /* End items end */
+
+footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-content: center;
+    padding-right: 0;
+}
+
+footer a {
+    background-color: var(--color_accent_2);
+    color: var(--color_light);
+    text-decoration: none;
+    text-align: center;
+    line-height: 75px;
+}
+
+footer a:hover {
+    background-color: var(--color_light);
+    color: var(--color_accent_1);
+}
 
 /* Smaller media tweeks */
 @media screen and (max-width: 850px) {

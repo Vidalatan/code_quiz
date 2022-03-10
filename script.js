@@ -251,8 +251,11 @@ function logScore(username, score) {
                 highscores_scores.insertBefore(new_element, highscores_scores.children[index]) // If score is already greater than item at current index, insert before it
                 break;
             } else if (score <= compare) {
-                highscores_scores.insertBefore(new_element, highscores_scores.children[index].nextSibling) // If score is equal to or less than, index after it
-                break;
+                if (highscores_scores.children[index].nextSibling == undefined) {
+                    highscores_scores.appendChild(new_element)
+                } else {
+                    continue;
+                }
             } else {
                 highscores_scores.appendChild(new_element);  // If nothing catches, list is empty so append to list
             }
