@@ -31,6 +31,16 @@ var timer_points=0;
 var username, clonedList, counter, timer, current_q;
 var q_x = document.querySelector("#q_x");
 
+// Function to check if given string is only whitespace or empty
+function onlyWhiteSpace(string) {
+    for (index in string) {
+        if (string[index] != " ") {
+            return false
+        }
+    }
+    return true
+}
+
 // Clone array so that it doesn't refrence original
 function cloneArray(array) {
     let x = [...array];
@@ -175,6 +185,13 @@ function logScore(username, score) {
     }
 }
 
+function quitButton() {
+    let button = document.querySelector(".quit_button")
+    button.addEventListener("click", event => {
+        endQuiz()
+    })
+}
+
 // Function that rotates questions from the cloned/shuffled list and gives answer options events
 function rotateQuestion() {
     let question_current = document.querySelector(".question_current");
@@ -206,8 +223,12 @@ function rotateQuestion() {
         } else {
             clickable.id = "wrong"
             clickable.addEventListener("click", event => {
-                clearInterval(timer)
-                setTimer(counter-2)
+                clickable.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue("--color_accent_2");
+                clickable.style.color = getComputedStyle(document.documentElement).getPropertyValue("--color_accent_2");
+                clickable.style.cursor = "not-allowed";
+                clickable.setAttribute("disabled", "disabled");
+                clearInterval(timer);
+                setTimer(counter-2);
             })
         }
         question_choices.appendChild(clickable);
@@ -223,6 +244,11 @@ function setButtons() {
             if (selector == "question") {
                 item.addEventListener("click", event => {
                     username = prompt("What is your Username?\n(Please keep it clean)")
+                    if (username == null) {                  // Check if clicked 'cancel'
+                        username = "Anon"
+                    } else if (onlyWhiteSpace(username)) {   // Check if submitted empty
+                        username = "Anon"
+                    }
                     displayBlock(selector);
                     setClone();
                     rotateQuestion();
@@ -234,5 +260,6 @@ function setButtons() {
             }
         })
     })
+    quitButton();
 }
 setButtons()

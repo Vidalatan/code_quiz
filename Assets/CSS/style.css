@@ -172,12 +172,18 @@ header,footer {
 }
 
 .question_quit {
+    cursor: pointer;
     width: 25%;
     margin: 10% 0 5% 0;
     position: relative;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.question_quit:hover {
+    background-color: var(--color_accent_2);
+    color: var(--color_light);
 }
 /* Question items end */
 
