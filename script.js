@@ -18,6 +18,11 @@ questionsList = [
         question: "What is the DOM?",
         answer: "Document Object Model",
         wrong:["Document Objective Mode", "Depreciated Occurance Mold"]
+    },
+    kelly_q = { // Question designed by Kelly
+        question: "Where should your styling be completed for your page?",
+        answer: "CSS file",
+        wrong:["javascript file", "secondary html", "styling.js"]
     }
 ]
 
@@ -144,7 +149,7 @@ function logScore(username, score) {
     let new_score = document.createElement("span")
 
     new_username.className = "score_name"
-    new_username.innerHTML = username+" "
+    new_username.innerHTML = username+" | "
     new_element.appendChild(new_username)
     new_score.className = "score_value"
     new_score.innerHTML = score

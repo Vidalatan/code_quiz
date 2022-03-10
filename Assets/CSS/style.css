@@ -189,11 +189,12 @@ header,footer {
 .highscores_scores {
     overflow-y: auto;
     text-align: center;
-    list-style-position: inside;
+    padding: 0;
 }
 
 .highscores_scores li {
-    width: 75%;
+    line-height: 175%;
+    font-size: larger;
 }
 
 /* Highscore items end */

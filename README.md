@@ -1,99 +1,39 @@
-# 04 Web APIs: Code Quiz
+# Code Quiz
 
-## Your Task
+## What is it?
 
-At some point in your journey to become a full-stack web developer, you’ll likely be asked to complete a coding assessment&mdash;perhaps as part of an interview process. A typical coding assessment includes both multiple-choice questions and interactive coding challenges. 
+This is a simple quiz made with HTML, CSS, and Javascript. It cylcles through 
+questions at random, randomizes the answers for those questions, and keeps track
+of the user's score as they complete the quiz. The quiz also has a highscore board 
+for keeping track of who has completed the quiz, and keeps them sorted in order of 
+score to show who has done the best.
 
-To help familiarize you with these tests and allow you to use the skills covered in this unit, this week’s homework invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. 
 
-This week’s coursework will equip you with all the skills you need to succeed in this assignment.
+## Purpose
 
-## User Story
+Allows the user to test their knowledge and compare that to others.
 
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
 
-## Acceptance Criteria
+## Sneek Peek
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+Here are a few images from the working product
 
-## Mock-Up
+>Rules
+>![Image of the rules screen](./Assets/Images/rules.png)
 
-The following animation demonstrates the application functionality:
+>Questions
+>![Image of question card](./Assets/Images/question.png) ![Image of question card with hovered button](./Assets/Images/question_hovered.png)
 
-![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./Assets/04-web-apis-homework-demo.gif)
+>End Screen
+>![Image of end card](./Assets/Images/end.png)
 
-## Grading Requirements
+>Highscores
+>![Image of highscores card](./Assets/Images/highscores.png)
 
-> **Note**: If a homework assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+## Finished Product
 
-This homework is graded based on the following criteria: 
+![Gif of site interaction](./Assets/Images/demo.gif)
 
-### Technical Acceptance Criteria: 40%
+Link to live [Code Quiz](https://vidalatan.github.io/code_quiz)
 
-* Satisfies all of the preceding acceptance criteria.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
-
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+Link to [Repository](https://github.com/Vidalatan/code_quiz)
