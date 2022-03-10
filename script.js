@@ -142,19 +142,90 @@ function setTimer(tick) {
     }, 1000)
 }
 
+// Function to sort list by the score.
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+function sortByScores(list) {
+    let unsorted = list
+    let sorted = unsorted.sort(function(x,y) {
+        if (x[1] > y[1]) {
+            return -1;
+        } else if (x[1] == y[1]) {
+            return 0;
+        } else {
+            return 1
+        }
+    })
+    return sorted
+}
+
+// Function grabs all locally saved scores and returns it as a list of [username, score] in order of decending score
+function getScores() {
+    let list= []
+
+    for (let index = 0; index < localStorage.length; index++) {
+        let item = localStorage.key(index)
+        console.log(item);
+        if (item.includes("quizsave")) {
+            let split_array = localStorage.getItem(item).split(",")
+            split_array[1] = parseInt(split_array[1])
+            list.unshift(split_array)
+        }
+    }
+
+    return sortByScores(list)
+}
+
+// Function attempts to populate the highscores board with locally saved information
+function populateHighscores() {
+    let pulled_scores = getScores()
+    if (pulled_scores.length != 0) {
+        pulled_scores.forEach(item => {
+            let highscores_scores = document.querySelector(".highscores_scores");
+            let new_element = document.createElement("li");
+            let new_username = document.createElement("span")
+            let new_score = document.createElement("span")
+            
+            new_username.className = "score_name"
+            new_username.innerHTML = item[0]+" | "
+            new_element.appendChild(new_username)
+            new_score.className = "score_value"
+            new_score.innerHTML = item[1]
+            new_element.appendChild(new_score)
+            
+            highscores_scores.appendChild(new_element);
+        })
+    }
+}
+
 // Function to tally score up between points for being correct, and points for good time and adds them to HTML
 function calculateScore() {
     let end_time_points = document.querySelector(".end_time_points")
     let end_correct_points = document.querySelector(".end_correct_points")
     let end_total_points = document.querySelector(".end_total_points")
-
+    
     end_time_points.innerHTML = timer_points;
     end_correct_points.innerHTML = correct_points;
     end_total_points.innerHTML = timer_points+correct_points;
+    
+    if (saveScore(username, timer_points+correct_points)) {
+        logScore(username, timer_points+correct_points)
+    }
 
-    logScore(username, timer_points+correct_points)
     correct_points = 0;
     timer_points = 0;
+}
+
+// Function prompts the user if they wish to save the score and saves locally if desired
+function saveScore(new_username, score) {
+    let ask = confirm("Would you like to save your score?")
+    if (ask) {
+        let save = [new_username, score]
+        JSON.stringify(save);
+        localStorage.setItem("quizsave-"+username, save)
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function logScore(username, score) {
@@ -192,6 +263,7 @@ function logScore(username, score) {
 // Function for giving the exit button on the questions card functionality
 function quitButton() {
     let button = document.querySelector(".quit_button")
+    let save
     button.addEventListener("click", event => {
         endQuiz()
     })
@@ -270,3 +342,4 @@ function setButtons() {
     quitButton();
 }
 setButtons()
+populateHighscores()
