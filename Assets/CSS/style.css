@@ -32,10 +32,6 @@ header,footer {
     margin: 50px 0;
 }
 
-.overflow_container {
-    overflow-y: auto;
-}
-
 .block {
     visibility: hidden;
     display: flex;
@@ -250,6 +246,10 @@ footer a:hover {
 
 /* Smaller media tweeks */
 @media screen and (max-width: 850px) {
+    .overflow_container {
+        overflow-y: auto;
+    }
+    
     .question_current{
         font-size: small;
     }
