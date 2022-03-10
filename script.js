@@ -26,6 +26,7 @@ questionsList = [
     }
 ]
 
+// Global variables
 var correct_points=0;
 var timer_points=0;
 var username, clonedList, counter, timer, current_q;
@@ -34,7 +35,7 @@ var q_x = document.querySelector("#q_x");
 // Function to check if given string is only whitespace or empty
 function onlyWhiteSpace(string) {
     for (index in string) {
-        if (string[index] != " ") {
+        if (string[index] != " ") { // If run into anything not whitespace, then return false
             return false
         }
     }
@@ -68,20 +69,20 @@ function shuffle(array) {
 function setClone() {
     let q_y = document.querySelector("#q_y");
     clonedList = shuffle(cloneArray(questionsList));
-    q_y.innerHTML = clonedList.length;
+    q_y.innerHTML = clonedList.length; // Set y of 'Question x of y' to the total amount of questions
     current_q = 1
-    q_x.innerHTML = current_q;
+    q_x.innerHTML = current_q; // Set x to 1 and will increment each time rotateQuestion is called
 }
 
 // Shuffle wrongs, insert correct at random, and return both the list and correct answer index
 function mixAnswers(correct, wrongs) {
     let wrong_clone = cloneArray(wrongs)
-    shuffle(wrong_clone);
+    shuffle(wrong_clone); // randomize question order
 
     let rand = Math.floor(Math.random()*(wrongs.length +1))
-    wrong_clone.splice(rand, 0, correct);
+    wrong_clone.splice(rand, 0, correct); //randomly insert correct answer
 
-    return [wrong_clone, rand];
+    return [wrong_clone, rand]; // return both the full list of choices, and the index of the correct answer
 }
 
 // Function to display given block and hide others
@@ -125,7 +126,7 @@ function endQuiz() {
 // Function sets timer for the 
 function setTimer(tick) {
     if (tick <= 0) {
-        endQuiz();
+        endQuiz();  // If amount of time left is 0 or less, immediately end the quiz
     }
     let question_timer = document.querySelector(".question_timer")
     counter = tick
@@ -141,6 +142,7 @@ function setTimer(tick) {
     }, 1000)
 }
 
+// Function to tally score up between points for being correct, and points for good time and adds them to HTML
 function calculateScore() {
     let end_time_points = document.querySelector(".end_time_points")
     let end_correct_points = document.querySelector(".end_correct_points")
@@ -168,26 +170,26 @@ function logScore(username, score) {
     new_score.innerHTML = score
     new_element.appendChild(new_score)
 
+    // Organize scores as they are entered in
     if (highscores_scores.children[0] === undefined) {
         highscores_scores.appendChild(new_element);
     } else {
         for (index in highscores_scores.children) {
             let compare = parseInt(highscores_scores.children[index].children[1].innerHTML)
             if (score > compare) {
-                highscores_scores.insertBefore(new_element, highscores_scores.children[index])
+                highscores_scores.insertBefore(new_element, highscores_scores.children[index]) // If score is already greater than item at current index, insert before it
                 break;
             } else if (score <= compare) {
-                highscores_scores.insertBefore(new_element, highscores_scores.children[index].nextSibling)
+                highscores_scores.insertBefore(new_element, highscores_scores.children[index].nextSibling) // If score is equal to or less than, index after it
                 break;
-            } else if (highscores_scores.children[index+1] !== undefined) {
-                continue
             } else {
-                highscores_scores.appendChild(new_element);
+                highscores_scores.appendChild(new_element);  // If nothing catches, list is empty so append to list
             }
         }
     }
 }
 
+// Function for giving the exit button on the questions card functionality
 function quitButton() {
     let button = document.querySelector(".quit_button")
     button.addEventListener("click", event => {
@@ -203,17 +205,18 @@ function rotateQuestion() {
     let mixed_answers = mixAnswers(question.answer, question.wrong);
     let choices = mixed_answers[0];
     let correct_index = mixed_answers[1];
+
     setTimer(choices.length*5);
     removeChildren(question_choices);
-
     question_current.textContent = question.question;
 
+    // Iterrate through each choice and create a button that does something depending on if it's the wrong or right answer
     choices.forEach( item => {
         let clickable = document.createElement("button");
         clickable.textContent = item;
-        if (choices.indexOf(item) == correct_index) {
+        if (choices.indexOf(item) == correct_index) {  // checks if this is the correct answer
             clickable.id = "correct"
-            if (clonedList.length > 0) {
+            if (clonedList.length > 0) {  // checks if this is the last question
                 clickable.addEventListener("click", event => {
                     nextQuestion();
                 })
@@ -225,6 +228,7 @@ function rotateQuestion() {
             }
         } else {
             clickable.id = "wrong"
+            // Make wrong choice change when clicked to indicate that it was incorrect
             clickable.addEventListener("click", event => {
                 clickable.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue("--color_accent_2");
                 clickable.style.color = getComputedStyle(document.documentElement).getPropertyValue("--color_accent_2");
